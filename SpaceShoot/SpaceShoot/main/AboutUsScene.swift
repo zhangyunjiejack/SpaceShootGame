@@ -33,7 +33,6 @@ class AboutUsScene: SKScene {
         let touch = touches.first
         if let location = touch?.location(in: self) {
             let node = self.nodes(at: location)
-            //let transition = SKTransition.flipHorizontal(withDuration: 0.5)
             if node.first?.name == "startGame" {
                 let transition = SKTransition.flipVertical(withDuration: 0.5)
                 let gameScene = GameScene(size: self.size)

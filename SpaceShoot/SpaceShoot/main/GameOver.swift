@@ -1,10 +1,3 @@
-//
-//  GameOver.swift
-//  SpacegameReloaded
-//
-//  Created by Ruijie Zhou on 12/5/17.
-//  Copyright © 2017 Training. All rights reserved.
-//
 
 import UIKit
 import SpriteKit
