@@ -9,11 +9,18 @@
 import SpriteKit
 import GameplayKit
 import CoreMotion
+import AVFoundation
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var starfield:SKEmitterNode!
     var player:SKSpriteNode!
+    
+    var backGroundPlayer = AVAudioPlayer()
+    
+    // Add lives
+    var livesArray:[SKSpriteNode]!
+    
     
     var scoreLabel:SKLabelNode!
     var score:Int = 0 {
@@ -34,7 +41,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var xAcceleration:CGFloat = 0
     var yAcceleration:CGFloat = 0
     
+    func stopBackGround() {
+        self.backGroundPlayer.stop()
+    }
+    
+    func playBackGroundMusic(fileNamed: String) {
+        
+        let url = Bundle.main.url(forResource: fileNamed, withExtension: nil)
+        
+        guard let newUrl = url else {
+            
+            print("Could not find file")
+            return
+        }
+        do {
+            backGroundPlayer = try AVAudioPlayer(contentsOf: newUrl)
+            backGroundPlayer.numberOfLoops = -1
+            backGroundPlayer.prepareToPlay()
+            backGroundPlayer.volume = 0.5
+            backGroundPlayer.play()
+        }
+        catch let error as NSError {
+            print(error.description)
+        }
+        
+    }
+    
     override func didMove(to view: SKView) {
+        
+        addLives()
+        
+        self.playBackGroundMusic(fileNamed: "shootingStarsSelected.mp3")
         
         starfield = SKEmitterNode(fileNamed: "Starfield")
         starfield.position = CGPoint(x: 0, y: 1472)
@@ -53,9 +90,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.contactDelegate = self
         
         scoreLabel = SKLabelNode(text: "Score: 0")
-        scoreLabel.position = CGPoint(x: 100, y: self.frame.size.height - 60)
+        scoreLabel.position = CGPoint(x: 80, y: self.frame.size.height - 70)
         scoreLabel.fontName = "AmericanTypewriter-Bold"
-        scoreLabel.fontSize = 36
+        scoreLabel.fontSize = 28
         scoreLabel.fontColor = UIColor.white
         score = 0
         
@@ -78,6 +115,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
     }
+    
+    // Add lives
+    func addLives() {
+        livesArray = [SKSpriteNode]()
+        
+        for live in 1 ... 3 {
+            let liveNode = SKSpriteNode(imageNamed: "shuttle")
+            liveNode.position = CGPoint(x: self.frame.size.width - CGFloat(4 - live) * liveNode.size.width, y: self.frame.size.height - 60)
+            
+            self.addChild(liveNode)
+            livesArray.append(liveNode)
+        }
+        
+    }
+
     
     
     
@@ -106,6 +158,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         actionArray.append(SKAction.move(to: CGPoint(x: position, y: -alien.size.height), duration: animationDuration))
+        
+        actionArray.append(SKAction.run {
+            
+            self.run(SKAction.playSoundFileNamed("loose.mp3", waitForCompletion: false))
+            
+            if self.livesArray.count > 0 {
+                let liveNode = self.livesArray.first
+                liveNode!.removeFromParent()
+                self.livesArray.removeFirst()
+                
+                if self.livesArray.count == 0 {
+                    // Game Over sound and screen
+                    //                    self.run(SKAction.playSoundFileNamed("looseGame.mp3", waitForCompletion: true))
+                    self.stopBackGround()
+                    let transition = SKTransition.flipHorizontal(withDuration: 0.5)
+                    let gameOver = SKScene(fileNamed: "GameOver") as! GameOver
+                    gameOver.score = self.score
+                    self.view?.presentScene(gameOver, transition: transition)
+                    
+                }
+            }
+        })
+        
         actionArray.append(SKAction.removeFromParent())
         
         alien.run(SKAction.sequence(actionArray))

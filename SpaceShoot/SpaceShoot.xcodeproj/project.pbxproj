@@ -16,6 +16,11 @@
 		5AA8143A1FCFA938008B3030 /* SpaceShootUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA814391FCFA938008B3030 /* SpaceShootUITests.swift */; };
 		5AA8144A1FCFAB69008B3030 /* fireflyTest.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5AA814491FCFAB69008B3030 /* fireflyTest.sks */; };
 		5AA8144C1FCFABA0008B3030 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AA8144B1FCFABA0008B3030 /* Assets.xcassets */; };
+		5AABE74C1FD7B5FB006A179A /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AABE74A1FD7B5F9006A179A /* GameOver.swift */; };
+		5AABE74D1FD7B5FB006A179A /* GameOver.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5AABE74B1FD7B5F9006A179A /* GameOver.sks */; };
+		5AABE7511FD7B852006A179A /* loose.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5AABE74E1FD7B850006A179A /* loose.mp3 */; };
+		5AABE7521FD7B852006A179A /* looseGame.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5AABE74F1FD7B851006A179A /* looseGame.mp3 */; };
+		5AABE7531FD7B852006A179A /* shootingStarsSelected.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5AABE7501FD7B851006A179A /* shootingStarsSelected.mp3 */; };
 		5ACB6F0F1FD7A90A00050B4A /* aboutus.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5ACB6F0E1FD7A90A00050B4A /* aboutus.sks */; };
 		5AD403EC1FD79A8900248B62 /* Menu.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5AD403E31FD79A8600248B62 /* Menu.sks */; };
 		5AD403ED1FD79A8900248B62 /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 5AD403E41FD79A8600248B62 /* Base.lproj */; };
@@ -86,6 +91,11 @@
 		5AA8143B1FCFA938008B3030 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5AA814491FCFAB69008B3030 /* fireflyTest.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = fireflyTest.sks; sourceTree = "<group>"; };
 		5AA8144B1FCFABA0008B3030 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5AABE74A1FD7B5F9006A179A /* GameOver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
+		5AABE74B1FD7B5F9006A179A /* GameOver.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOver.sks; sourceTree = "<group>"; };
+		5AABE74E1FD7B850006A179A /* loose.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = loose.mp3; sourceTree = "<group>"; };
+		5AABE74F1FD7B851006A179A /* looseGame.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = looseGame.mp3; sourceTree = "<group>"; };
+		5AABE7501FD7B851006A179A /* shootingStarsSelected.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = shootingStarsSelected.mp3; sourceTree = "<group>"; };
 		5ACB6F0E1FD7A90A00050B4A /* aboutus.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = aboutus.sks; sourceTree = "<group>"; };
 		5AD403E31FD79A8600248B62 /* Menu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Menu.sks; sourceTree = "<group>"; };
 		5AD403E41FD79A8600248B62 /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Base.lproj; sourceTree = "<group>"; };
@@ -171,6 +181,11 @@
 		5AA814121FCFA937008B3030 /* SpaceShoot */ = {
 			isa = PBXGroup;
 			children = (
+				5AABE74E1FD7B850006A179A /* loose.mp3 */,
+				5AABE74F1FD7B851006A179A /* looseGame.mp3 */,
+				5AABE7501FD7B851006A179A /* shootingStarsSelected.mp3 */,
+				5AABE74B1FD7B5F9006A179A /* GameOver.sks */,
+				5AABE74A1FD7B5F9006A179A /* GameOver.swift */,
 				5AA814131FCFA938008B3030 /* AppDelegate.swift */,
 				5AA814171FCFA938008B3030 /* Actions.sks */,
 				5AD403FA1FD79B4E00248B62 /* back.png */,
@@ -348,14 +363,18 @@
 				5AD404051FD79DC300248B62 /* Starfield.sks in Resources */,
 				5AD4041D1FD79E2200248B62 /* torpedo@3x.png in Resources */,
 				5AD403FF1FD79B4F00248B62 /* back.png in Resources */,
+				5AABE7521FD7B852006A179A /* looseGame.mp3 in Resources */,
 				5AD403EC1FD79A8900248B62 /* Menu.sks in Resources */,
 				5AD404151FD79E2200248B62 /* Explosion.sks in Resources */,
+				5AABE74D1FD7B5FB006A179A /* GameOver.sks in Resources */,
 				5AD403F31FD79A8900248B62 /* Explosion.sks in Resources */,
+				5AABE7511FD7B852006A179A /* loose.mp3 in Resources */,
 				5AA8141F1FCFA938008B3030 /* Main.storyboard in Resources */,
 				5AD403F61FD79AE100248B62 /* GameScene.sks in Resources */,
 				5AD403ED1FD79A8900248B62 /* Base.lproj in Resources */,
 				5ACB6F0F1FD7A90A00050B4A /* aboutus.sks in Resources */,
 				5AD404291FD7A2AB00248B62 /* zqe.png in Resources */,
+				5AABE7531FD7B852006A179A /* shootingStarsSelected.mp3 in Resources */,
 				5AD4041E1FD79E2200248B62 /* alien3@2x.png in Resources */,
 				5AD404181FD79E2200248B62 /* alien@3x.png in Resources */,
 				5AD4042A1FD7A2AB00248B62 /* zyj.png in Resources */,
@@ -408,6 +427,7 @@
 				5AD403F11FD79A8900248B62 /* menuScene.swift in Sources */,
 				5AA8141C1FCFA938008B3030 /* GameViewController.swift in Sources */,
 				5AD404031FD79D5400248B62 /* GameScene.swift in Sources */,
+				5AABE74C1FD7B5FB006A179A /* GameOver.swift in Sources */,
 				5AA814141FCFA938008B3030 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
