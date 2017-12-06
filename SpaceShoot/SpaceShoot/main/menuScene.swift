@@ -1,9 +1,9 @@
 //
 //  menuScene.swift
-//  SpacegameReloaded
+//  SpaceShoot
 //
 //  Created by 石济 on 11/11/17.
-//  Copyright © 2017 Training. All rights reserved.
+//  Copyright © 2017 TeamNoobs. All rights reserved.
 //
 
 import SpriteKit

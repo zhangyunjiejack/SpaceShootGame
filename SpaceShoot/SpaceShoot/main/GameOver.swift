@@ -1,3 +1,10 @@
+//
+//  menuScene.swift
+//  SpaceShoot
+//
+//  Created by Ruijie Zhou on 11/11/17.
+//  Copyright © 2017 TeamNoobs. All rights reserved.
+//
 
 import UIKit
 import SpriteKit
