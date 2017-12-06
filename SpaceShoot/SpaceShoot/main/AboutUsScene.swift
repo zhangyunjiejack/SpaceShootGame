@@ -33,23 +33,11 @@ class AboutUsScene: SKScene {
         let touch = touches.first
         if let location = touch?.location(in: self) {
             let node = self.nodes(at: location)
-            let transition = SKTransition.flipHorizontal(withDuration: 0.5)
-            
-            if node[0].name == "backToMenu" {
-            
-                print("touched")
-                if let view = self.view as! SKView? {
-                    if let scene = SKScene(fileNamed: "Menu") {
-                        scene.scaleMode = .aspectFill
-                        
-                        view.presentScene(scene)
-                    }
-                    
-                    view.ignoresSiblingOrder = true
-                    
-                    view.showsFPS = true
-                    view.showsNodeCount = true
-                }
+            //let transition = SKTransition.flipHorizontal(withDuration: 0.5)
+            if node.first?.name == "startGame" {
+                let transition = SKTransition.flipVertical(withDuration: 0.5)
+                let gameScene = GameScene(size: self.size)
+                self.view?.presentScene(gameScene, transition: transition)
             }
         }
     }

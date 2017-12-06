@@ -31,7 +31,7 @@ class menuScene: SKScene {
             
             if nodesArray.first?.name == "info" {
                 //print("touched")
-                if let view = self.view as! SKView? {
+                if let view = self.view as SKView? {
                     if let scene = SKScene(fileNamed: "AboutUs") {
                         scene.scaleMode = .aspectFill
                         
