@@ -1,5 +1,5 @@
 //
-//  menuScene.swift
+//  GameOver.swift
 //  SpaceShoot
 //
 //  Created by Ruijie Zhou on 11/11/17.

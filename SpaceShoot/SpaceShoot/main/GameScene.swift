@@ -1,5 +1,5 @@
 //
-//  menuScene.swift
+//  GameScene.swift
 //  SpaceShoot
 //
 //  Created by 石济 on 11/11/17.
@@ -328,7 +328,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         explosion.position = alienNode.position
         self.addChild(explosion)
         
-        //        self.run(SKAction.playSoundFileNamed("explosion.mp3", waitForCompletion: false))
+        //self.run(SKAction.playSoundFileNamed("explosion.mp3", waitForCompletion: false))
         
         playExplosion(fileNamed: "explosion.mp3")
         
@@ -348,8 +348,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didSimulatePhysics() {
         
         player.position.x += xAcceleration * 50
-        player.position.y += yAcceleration * 50 //may should be deleted
+        player.position.y += yAcceleration * 50 //may be deleted
         
+        
+        //cycle in the screen
         if player.position.x < -20 {
             player.position = CGPoint(x: self.size.width + 20, y: player.position.y)
         }else if player.position.x > self.size.width + 20 {
