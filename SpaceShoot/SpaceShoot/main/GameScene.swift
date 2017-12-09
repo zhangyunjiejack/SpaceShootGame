@@ -1,9 +1,9 @@
 //
 //  GameScene.swift
-//  SpacegameReloaded
+//  SpaceShoot
 //
-//  Created by Training on 01/10/2016.
-//  Copyright © 2016 Training. All rights reserved.
+//  Created by 石济 on 11/11/17.
+//  Copyright © 2017 TeamNoobs. All rights reserved.
 //
 
 import SpriteKit
@@ -17,6 +17,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var player:SKSpriteNode!
     
     var backGroundPlayer = AVAudioPlayer()
+    var torpedoPlayer = AVAudioPlayer()
+    var explosionPlayer = AVAudioPlayer()
     
     // Add lives
     var livesArray:[SKSpriteNode]!
@@ -67,6 +69,48 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    func playTorpedo(fileNamed: String) {
+        let url = Bundle.main.url(forResource: fileNamed, withExtension: nil)
+        
+        guard let newUrl = url else {
+            
+            print("Could not find file")
+            return
+        }
+        do {
+            torpedoPlayer = try AVAudioPlayer(contentsOf: newUrl)
+            torpedoPlayer.numberOfLoops = 1
+            torpedoPlayer.prepareToPlay()
+            torpedoPlayer.volume = 0.2
+            torpedoPlayer.play()
+        }
+        catch let error as NSError {
+            print(error.description)
+        }
+        
+    }
+    
+    func playExplosion(fileNamed: String) {
+        let url = Bundle.main.url(forResource: fileNamed, withExtension: nil)
+        
+        guard let newUrl = url else {
+            
+            print("Could not find file")
+            return
+        }
+        do {
+            explosionPlayer = try AVAudioPlayer(contentsOf: newUrl)
+            explosionPlayer.numberOfLoops = 1
+            explosionPlayer.prepareToPlay()
+            explosionPlayer.volume = 0.2
+            explosionPlayer.play()
+        }
+        catch let error as NSError {
+            print(error.description)
+        }
+        
+    }
+    
     override func didMove(to view: SKView) {
         
         addLives()
@@ -99,7 +143,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(scoreLabel)
         
         
-        gameTimer = Timer.scheduledTimer(timeInterval: 0.75, target: self, selector: #selector(addAlien), userInfo: nil, repeats: true)
+        gameTimer = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(addAlien), userInfo: nil, repeats: true)
         
         
         motionManger.accelerometerUpdateInterval = 0.2
@@ -122,7 +166,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         for live in 1 ... 3 {
             let liveNode = SKSpriteNode(imageNamed: "shuttle")
-            liveNode.position = CGPoint(x: self.frame.size.width - CGFloat(4 - live) * liveNode.size.width, y: self.frame.size.height - 60)
+            liveNode.position = CGPoint(x: self.frame.size.width - CGFloat(4 - live) * liveNode.size.width * 0.5, y: self.frame.size.height - 60)
             
             self.addChild(liveNode)
             livesArray.append(liveNode)
@@ -141,7 +185,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let randomAlienPosition = GKRandomDistribution(lowestValue: 0, highestValue: 414)
         let position = CGFloat(randomAlienPosition.nextInt())
         
-        alien.position = CGPoint(x: position, y: self.frame.size.height + alien.size.height)
+        alien.position = CGPoint(x: position, y: self.frame.size.height + alien.size.height - CGFloat(arc4random_uniform(300)))
         
         alien.physicsBody = SKPhysicsBody(rectangleOf: alien.size)
         alien.physicsBody?.isDynamic = true
@@ -195,7 +239,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     func fireTorpedo() {
-        self.run(SKAction.playSoundFileNamed("torpedo.mp3", waitForCompletion: false))
+        // self.run(SKAction.playSoundFileNamed("torpedo.mp3", waitForCompletion: false))
+        
+        playTorpedo(fileNamed: "torpedo.mp3")
         
         let torpedoNode = SKSpriteNode(imageNamed: "torpedo")
         let torpedoNode2 = SKSpriteNode(imageNamed: "torpedo")
@@ -282,7 +328,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         explosion.position = alienNode.position
         self.addChild(explosion)
         
-        self.run(SKAction.playSoundFileNamed("explosion.mp3", waitForCompletion: false))
+        //self.run(SKAction.playSoundFileNamed("explosion.mp3", waitForCompletion: false))
+        
+        playExplosion(fileNamed: "explosion.mp3")
         
         torpedoNode.removeFromParent()
         alienNode.removeFromParent()
@@ -300,8 +348,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didSimulatePhysics() {
         
         player.position.x += xAcceleration * 50
-        player.position.y += yAcceleration * 50 //may should be deleted
+        player.position.y += yAcceleration * 50 //may be deleted
         
+        
+        //cycle in the screen
         if player.position.x < -20 {
             player.position = CGPoint(x: self.size.width + 20, y: player.position.y)
         }else if player.position.x > self.size.width + 20 {
@@ -315,9 +365,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
     }
-    
-    
-    
     
     
     
